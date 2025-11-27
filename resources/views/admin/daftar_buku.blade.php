@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="m-10">
-        <form action="{{ 'logout' }}" class="btn btn-error cursor-pointer">
+        <form action="{{ route('admin.logout') }}" class="btn btn-error cursor-pointer">
             @csrf
             <button type="submit">Logout</button>
         </form>

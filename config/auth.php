@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Admin;
+use App\Models\Peminjam;
+
 return [
 
     /*
@@ -36,9 +39,13 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'peminjams' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'peminjams',
+        ],
+        'admins' => [
+            'driver' => 'session',
+            'provider' => 'admins',
         ],
     ],
 
@@ -60,9 +67,13 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'peminjams' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+            'model' => Peminjam::class,
+        ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => Admin::class,
         ],
 
         // 'users' => [

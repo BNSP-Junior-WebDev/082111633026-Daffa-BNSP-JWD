@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Peminjam extends Model
+class Peminjam extends Authenticatable
 {
     protected $fillable = [
         'nama_peminjam',
@@ -16,10 +17,21 @@ class Peminjam extends Model
     ];
 
     public $timestamps = false;
+    
+    public $tables = 'peminjams';
 
     protected $primaryKey = 'id_peminjam';
-    public $incrementing = false;
-    protected $keyType = 'string';
+
+    protected $hidden = [
+        'pass_peminjam',
+        'remember_token',
+    ];
+
+    // Penting! Untuk password custom
+    public function getAuthPassword()
+    {
+        return $this->pass_peminjam;
+    }
 
     public function peminjamans(): HasMany {
         return $this->hasMany(Peminjaman::class);
